@@ -1,0 +1,124 @@
+@keyframes to-unvisitable {
+  50% {
+    transform: scale(0.5, 0.5);
+    z-index: 100;
+    border: 1px solid navy;
+    background-color: navy;
+  }
+
+  50% {
+    transform: scale(1.2, 1.2);
+    border: 1px solid navy;
+    background-color: navy;
+  }
+
+  100% {
+    transform: scale(1, 1);
+    border: 1px solid navy;
+    background-color: navy;
+  }
+}
+
+@keyframes to-dest {
+  100% {
+    background-color: #00ff00;
+  }
+}
+
+@keyframes to-visited {
+  0% {
+    transform: scale(0.5, 0.5);
+    background-color: lightblue;
+    border-radius: 100%;
+  }
+
+  50% {
+    transform: scale(1, 1);
+    border-radius: 0%;
+    background-color: lightblue;
+    border: 1px solid hsl(199, 100%, 72%);
+  }
+
+  100% {
+    background-color: turquoise;
+    border: 1px solid hsl(199, 100%, 72%);
+  }
+}
+
+@keyframes to-path {
+  50% {
+    transform: scale(0.5, 0.5);
+    z-index: 100;
+    border: 1px solid lightgreen;
+    background-color: lightgreen;
+  }
+
+  50% {
+    transform: scale(1.2, 1.2);
+    border: 1px solid lightgreen;
+    background-color: lightgreen;
+  }
+
+  100% {
+    transform: scale(1, 1);
+    border: 1px solid springgreen;
+    background-color: springgreen;
+  }
+}
+
+.base {
+  width: 4.5vmin;
+  height: 4.5vmin;
+  text-align: center;
+  background-color: #dbe8ff;
+  transition: all 0.3s ease-in-out;
+  background-image: none;
+  border: 1px solid hsl(199, 100%, 72%);
+}
+
+.start {
+  width: 4.5vmin;
+  height: 4.5vmin;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid hsl(199, 100%, 72%);
+  background-color: #dbe8ff;
+  background-image: url("../assets/home.svg");
+  background-position: center;
+  background-size: 3vmin 3vmin;
+  background-repeat: no-repeat;
+}
+
+.dest {
+  width: 4.5vmin;
+  height: 4.5vmin;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid hsl(199, 100%, 72%);
+  background-color: #dbe8ff;
+  background-image: url("../assets/finish.svg");
+  background-position: center;
+  background-size: 3vmin 3vmin;
+  background-repeat: no-repeat;
+}
+
+.unvisitable {
+  width: 4.5vmin;
+  height: 4.5vmin;
+  text-align: center;
+  animation: to-unvisitable 0.5s ease-in-out forwards normal;
+}
+
+.visited {
+  width: 4.5vmin;
+  height: 4.5vmin;
+  text-align: center;
+  animation: to-visited 1s ease-in-out forwards normal;
+}
+
+.path {
+  width: 4.5vmin;
+  height: 4.5vmin;
+  text-align: center;
+  animation: to-path 1s ease-in-out forwards normal;
+}

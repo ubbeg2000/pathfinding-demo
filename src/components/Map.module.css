@@ -1,0 +1,30 @@
+.grid-container {
+  display: grid;
+  grid-column-start: 1;
+  grid-template-columns: repeat(20, 4.5vmin);
+  grid-template-rows: repeat(20, 4.5vmin);
+  background-color: #dbe8ff;
+  width: 90vmin;
+  margin: 1rem;
+  border: 1.2vmin solid black;
+  height: fit-content;
+}
+
+.control-container {
+  width: 50vw;
+}
+
+.main-container {
+  display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .main-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .control-container {
+    width: 100vw;
+  }
+}
