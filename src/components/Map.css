@@ -1,0 +1,6 @@
+.grid-container {
+  display: grid;
+  grid-column-start: 1;
+  grid-template-columns: repeat(50, 30px);
+  width: 70vw;
+}

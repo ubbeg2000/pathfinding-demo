@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect, useMemo } from "react";
+import Map from "./components/Map";
+import Node from "./components/Node";
+import { GlobalContext } from "./store/context";
 
-function App() {
+import "./App.css";
+
+const App = () => {
+  const [animationDelay, setAnimationDelay] = useState(300);
+  const [selectStart, setSelectStart] = useState(true);
+  const [closedList, setClosedList] = useState([]);
+  const [openList, setOpenList] = useState([]);
+  const [startNode, setStartNode] = useState([0, 0]);
+  const [destNode, setDestNode] = useState([99, 46]);
+  const [path, setPath] = useState([]);
+  const [grid, setGrid] = useState([[]]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GlobalContext>
+        <Map />
+      </GlobalContext>
     </div>
   );
-}
+};
 
 export default App;
