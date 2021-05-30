@@ -1,0 +1,12 @@
+.container-style {
+  display: block;
+  padding-top: 1rem;
+  text-align: left;
+}
+
+.node-info {
+  align-items: center;
+  display: flex;
+  padding-top: 1rem;
+  cursor: pointer;
+}

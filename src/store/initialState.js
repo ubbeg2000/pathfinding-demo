@@ -13,6 +13,8 @@ for (let i = 0; i < 20; i++) {
         x: j,
         y: i,
         nodeState: {
+          x: j,
+          y: i,
           isPath: false,
           isVisited: false,
           isVisitable: true,
@@ -35,7 +37,6 @@ export const INITIAL_STATE = {
     y: 19,
   },
   action: CHANGE_START,
-  animation: true,
   pathfindingAlgorithm: PATHFINDING_ALGORITHMS.BFS,
   mazeAlgorithm: MAZE_ALGORITHMS.simpleRandomMaze,
 };

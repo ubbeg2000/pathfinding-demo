@@ -12,11 +12,16 @@ export const isVisitable = (coord, grid) => {
   return grid[coord.y][coord.x].nodeState.isVisitable;
 };
 
-export const isReachable = (coord1, coord2) => {
-  if (Math.abs(coord1.x - coord2.x) <= 1 && coord1.y === coord2.y) {
-    return true;
-  } else if (Math.abs(coord1.y - coord2.y) <= 1 && coord1.x === coord2.x) {
-    return true;
+export const isReachable = (coord1, coord2, is8Way) => {
+  let xdist = Math.abs(coord1.x - coord2.x);
+  let ydist = Math.abs(coord1.y - coord2.y);
+  if (is8Way) {
+    return xdist <= 1 && ydist <= 1;
+  } else {
+    return (
+      (ydist <= 1 && coord1.x === coord2.x) ||
+      (xdist <= 1 && coord1.y === coord2.y)
+    );
   }
 };
 
@@ -37,13 +42,14 @@ const shuffle = (arr) => {
   return arr;
 };
 
-export const getAround = (coord, visited, map) => {
-  const dx = [-1, 0, 1, 0];
-  const dy = [0, -1, 0, 1];
+export const getAround = (coord, visited, map, is8Way) => {
+  const dx = [-1, -1, 0, 1, 1, 1, 0, -1];
+  const dy = [0, -1, -1, -1, 0, 1, 1, 1];
+
   let retval = [];
 
-  dx.forEach((x, i) => {
-    let newCoord = { x: coord.x + x, y: coord.y + dy[i] };
+  for (let i = 0; i < 8; i = i + (is8Way ? 1 : 2)) {
+    let newCoord = { x: coord.x + dx[i], y: coord.y + dy[i] };
     if (
       isValidCoord(newCoord) &&
       !isVisited(newCoord, visited) &&
@@ -51,7 +57,7 @@ export const getAround = (coord, visited, map) => {
     ) {
       retval.push(newCoord);
     }
-  });
+  }
 
   return retval;
 };
@@ -71,13 +77,15 @@ export const mazeGetAround = (coord, visited) => {
   return shuffle(retval);
 };
 
-export const reconstructPath = (closed) => {
+export const reconstructPath = (closed, is8Way) => {
   let reversedClosed = [...closed].reverse();
   let currentNodeIndex = 0;
   let path = [reversedClosed[currentNodeIndex]];
 
   for (let i = 1; i < reversedClosed.length; i++) {
-    if (isReachable(reversedClosed[currentNodeIndex], reversedClosed[i])) {
+    if (
+      isReachable(reversedClosed[currentNodeIndex], reversedClosed[i], is8Way)
+    ) {
       path.push(reversedClosed[i]);
       currentNodeIndex = i;
     }
@@ -100,3 +108,12 @@ export const mazeBase = () => {
 
   return maze;
 };
+
+export const isSolved = (closed, dest) => {
+  return (
+    closed.filter((coord) => coord.x === dest.x && coord.y === dest.y)
+      .length !== 0
+  );
+};
+
+export const isIn = isSolved;

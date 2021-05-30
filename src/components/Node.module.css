@@ -1,7 +1,7 @@
 @keyframes to-unvisitable {
   50% {
     transform: scale(0.5, 0.5);
-    z-index: 100;
+    /* z-index: 100; */
     border: 1px solid navy;
     background-color: navy;
   }
@@ -48,7 +48,7 @@
 @keyframes to-path {
   50% {
     transform: scale(0.5, 0.5);
-    z-index: 100;
+    /* z-index: 100; */
     border: 1px solid lightgreen;
     background-color: lightgreen;
   }

@@ -10,15 +10,14 @@ import {
   CHANGE_PATH_TRUE,
   RESET,
 } from "../store/reducer";
-import { reconstructPath } from "../functions/helper";
 
 const NodeGrid = ({
+  speed,
   isAuto,
-  setIsAuto,
   isAnimated,
-  setIsAnimated,
   isStarted,
   setIsStarted,
+  is8Way,
 }) => {
   const { state, dispatch } = useContext(Context);
 
@@ -29,15 +28,14 @@ const NodeGrid = ({
       let open = [];
       let path = [];
 
-      state.pathfindingAlgorithm(
+      path = state.pathfindingAlgorithm(
         state.start,
         state.dest,
         state.grid,
         open,
-        closed
+        closed,
+        is8Way
       );
-
-      path = reconstructPath(closed);
 
       if (isAnimated && !isAuto) {
         for (let i = 0; i < closed.length; i++) {
@@ -47,22 +45,27 @@ const NodeGrid = ({
                 type: CHANGE_VISITED_TRUE,
                 payload: { x: closed[i].x, y: closed[i].y },
               }),
-            10
+            100 * 2 ** speed * i
           );
         }
-        for (let i = 0; i < path.length; i++) {
-          setTimeout(
-            () =>
-              dispatch({
-                type: CHANGE_PATH_TRUE,
-                payload: { x: path[i].x, y: path[i].y },
-              }),
-            10
-          );
+        if (path.length !== 0) {
+          setTimeout(() => {
+            for (let i = 0; i < path.length; i++) {
+              setTimeout(
+                () =>
+                  dispatch({
+                    type: CHANGE_PATH_TRUE,
+                    payload: { x: path[i].x, y: path[i].y },
+                  }),
+                100 * 2 ** speed * i
+              );
+            }
+          }, 100 * 2 ** speed * closed.length);
         }
+
         setTimeout(
           () => setIsStarted(false),
-          10 * (closed.length + path.length)
+          100 * 2 ** speed * (closed.length + path.length)
         );
       } else {
         for (let i = 0; i < closed.length; i++) {
@@ -71,16 +74,18 @@ const NodeGrid = ({
             payload: { x: closed[i].x, y: closed[i].y },
           });
         }
-        for (let i = 0; i < path.length; i++) {
-          dispatch({
-            type: CHANGE_PATH_TRUE,
-            payload: { x: path[i].x, y: path[i].y },
-          });
+        if (path.length !== 0) {
+          for (let i = 0; i < path.length; i++) {
+            dispatch({
+              type: CHANGE_PATH_TRUE,
+              payload: { x: path[i].x, y: path[i].y },
+            });
+          }
         }
         setIsStarted(false);
       }
     }
-  }, [isStarted, isAnimated, isAuto, state.dest, state.start]);
+  }, [isStarted, isAnimated, isAuto, is8Way, state.dest, state.start]);
 
   const handleClick = (x, y) => {
     if (state.action === CHANGE_DEST || state.action === CHANGE_START)

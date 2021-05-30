@@ -5,8 +5,9 @@ import NodeGrid from "./NodeGrid";
 import { Context } from "../store/context";
 
 const Map = () => {
-  console.log("P");
   const { dispatch } = useContext(Context);
+  const [speed, setSpeed] = useState(0);
+  const [is8Way, setIs8Way] = useState(false);
   const [isAuto, setIsAuto] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
   const [isAnimated, setIsAnimated] = useState(true);
@@ -14,36 +15,44 @@ const Map = () => {
   const GridMemo = useMemo(
     () => (
       <NodeGrid
+        speed={speed}
         isAuto={isAuto}
-        setIsAuto={setIsAuto}
         isAnimated={isAnimated}
-        setIsAnimated={setIsAnimated}
         isStarted={isStarted}
         setIsStarted={setIsStarted}
+        is8Way={is8Way}
       />
     ),
-    [isAuto, setIsAuto, isAnimated, setIsAnimated, isStarted, setIsStarted]
+    [speed, isAuto, isAnimated, isStarted, setIsStarted, is8Way]
   );
 
   const ControlMemo = useMemo(
     () => (
       <Control
+        speed={speed}
+        setSpeed={setSpeed}
         isAuto={isAuto}
         setIsAuto={setIsAuto}
         isAnimated={isAnimated}
         setIsAnimated={setIsAnimated}
         isStarted={isStarted}
         setIsStarted={setIsStarted}
+        is8Way={is8Way}
+        setIs8Way={setIs8Way}
         dispatch={dispatch}
       />
     ),
     [
+      speed,
+      setSpeed,
       isAuto,
       setIsAuto,
       isAnimated,
       setIsAnimated,
       isStarted,
       setIsStarted,
+      is8Way,
+      setIs8Way,
       dispatch,
     ]
   );
