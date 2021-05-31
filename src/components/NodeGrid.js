@@ -85,7 +85,15 @@ const NodeGrid = ({
         setIsStarted(false);
       }
     }
-  }, [isStarted, isAnimated, isAuto, is8Way, state.dest, state.start]);
+  }, [
+    isStarted,
+    isAnimated,
+    isAuto,
+    is8Way,
+    state.dest,
+    state.start,
+    state.pathfindingAlgorithm,
+  ]);
 
   const handleClick = (x, y) => {
     if (state.action === CHANGE_DEST || state.action === CHANGE_START)

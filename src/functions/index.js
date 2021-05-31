@@ -5,6 +5,7 @@ import { Dijkstra } from "./Dijkstra";
 import { emptyMaze } from "./emptyMaze";
 import { simpleRandomMaze } from "./simpleRandomMaze";
 import { recursiveBacktrackMaze } from "./recursiveBacktrackMaze";
+import { recursiveDivisionMaze } from "./recursiveDivisionMaze";
 
 export const PATHFINDING_ALGORITHMS = {
   DFS: DFS,
@@ -17,4 +18,5 @@ export const MAZE_ALGORITHMS = {
   emptyMaze: emptyMaze,
   simpleRandomMaze: simpleRandomMaze,
   recursiveBacktrackMaze: recursiveBacktrackMaze,
+  recursiveDivisionMaze: recursiveDivisionMaze,
 };

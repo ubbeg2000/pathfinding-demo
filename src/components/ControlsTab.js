@@ -71,7 +71,10 @@ const ControlsTab = ({
           <MenuItem value="emptyMaze">Empty Maze</MenuItem>
           <MenuItem value="simpleRandomMaze">Simple Random Maze</MenuItem>
           <MenuItem value="recursiveBacktrackMaze">
-            Recursize Backtrack Maze
+            Recursive Backtrack Maze
+          </MenuItem>
+          <MenuItem value="recursiveDivisionMaze">
+            Recursive Division Maze
           </MenuItem>
         </Select>
       </Grid>
