@@ -19,7 +19,7 @@ export const DFSHelper = (start, dest, map, open = [], closed = [], is8Way) => {
 export const DFS = (start, dest, map, open = [], closed = [], is8Way) => {
   DFSHelper(start, dest, map, open, closed, is8Way);
   if (isSolved(closed, dest)) {
-    return reconstructPath(closed, dest, is8Way);
+    return reconstructPath(closed, is8Way);
   } else {
     return [];
   }

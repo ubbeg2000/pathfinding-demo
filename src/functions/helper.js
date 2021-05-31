@@ -18,9 +18,10 @@ export const isReachable = (coord1, coord2, is8Way) => {
   if (is8Way) {
     return xdist <= 1 && ydist <= 1;
   } else {
-    if (ydist === 1 && coord1.x === coord2.x) return true;
-    if (xdist === 1 && coord1.y === coord2.y) return true;
+    if (xdist === 1 && ydist === 0) return true;
+    if (ydist === 1 && xdist === 0) return true;
   }
+  return false;
 };
 
 const shuffle = (arr) => {
@@ -46,7 +47,7 @@ export const getAround = (coord, visited, map, is8Way) => {
 
   let retval = [];
 
-  for (let i = 0; i < 8; i = i + (is8Way ? 1 : 2)) {
+  for (let i = 0; i < 8; i += is8Way ? 1 : 2) {
     let newCoord = { x: coord.x + dx[i], y: coord.y + dy[i] };
     if (
       isValidCoord(newCoord) &&
