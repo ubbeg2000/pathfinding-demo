@@ -18,8 +18,8 @@ export const isReachable = (coord1, coord2, is8Way) => {
   if (is8Way) {
     return xdist <= 1 && ydist <= 1;
   } else {
-    if (ydist <= 1 && coord1.x === coord2.x) return true;
-    if (xdist <= 1 && coord1.y === coord2.y) return true;
+    if (ydist === 1 && coord1.x === coord2.x) return true;
+    if (xdist === 1 && coord1.y === coord2.y) return true;
   }
 };
 
